@@ -95,13 +95,14 @@ public class SLE_TEST {
                         for (int m2 = 0; m2 <= sle.S; m2++) {
                             for (int n2 = 0; n2 <= sle.N; n2++) {
                                 int j = m2*(sle.N+1)+n2;
-                                TM[j][i] = sle.getTransitionMatrixElement(m1, n1, m2, n2);
-                                row_sum += TM[j][i]; 
+                                double a = sle.getTransitionMatrixElement(m1, n1, m2, n2);
+                                TM[j][i] = a;
+                                if (i!=j) row_sum += a; 
                                 if (j == last_row) TM[j][i] = 1;
                             }
                         }
                         //set diagonal elements as negative row sum
-                        TM[i][i] = -1 * row_sum;
+                        if (i != last_row) TM[i][i] = -1 * row_sum;
                     }
                 }
                 
